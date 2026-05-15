@@ -1,0 +1,273 @@
+{
+	"info": {
+		"name": "Expense Tracker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "userId",
+			"value": "1"
+		}
+	],
+	"item": [
+		{
+			"name": "User APIs",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{"key": "Content-Type", "value": "application/json"}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Richa Tripathi\",\n  \"email\": \"richa@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users"]
+						}
+					}
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Category APIs",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{"key": "Content-Type", "value": "application/json"}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Shopping\",\n  \"monthlyBudget\": 4000.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "categories"]
+						}
+					}
+				},
+				{
+					"name": "List All Categories",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "categories"]
+						}
+					}
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{"key": "Content-Type", "value": "application/json"}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Food & Dining\",\n  \"monthlyBudget\": 6000.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/categories/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "categories", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Category (No Expenses)",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/categories/6",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "categories", "6"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Expense APIs",
+			"item": [
+				{
+					"name": "Add Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{"key": "Content-Type", "value": "application/json"}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 350.00,\n  \"description\": \"Dinner with friends\",\n  \"expenseDate\": \"2026-05-14\",\n  \"categoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses"]
+						}
+					}
+				},
+				{
+					"name": "List Expenses (Paginated)",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses?page=0&size=10&sortBy=date&direction=desc",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"},
+								{"key": "sortBy", "value": "date"},
+								{"key": "direction", "value": "desc"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Expense By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update Expense",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{"key": "Content-Type", "value": "application/json"}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 300.00,\n  \"description\": \"Updated lunch expense\",\n  \"expenseDate\": \"2026-05-01\",\n  \"categoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Expense",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Search & Summary APIs",
+			"item": [
+				{
+					"name": "Search Expenses - By Category",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/search?categoryId=1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "search"],
+							"query": [
+								{"key": "categoryId", "value": "1"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Expenses - By Date Range",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/search?startDate=2026-05-01&endDate=2026-05-10",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "search"],
+							"query": [
+								{"key": "startDate", "value": "2026-05-01"},
+								{"key": "endDate", "value": "2026-05-10"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Expenses - By Amount Range",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/search?minAmount=100&maxAmount=500",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "search"],
+							"query": [
+								{"key": "minAmount", "value": "100"},
+								{"key": "maxAmount", "value": "500"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Expenses - Combined Filters",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/expenses/search?categoryId=1&startDate=2026-05-01&endDate=2026-05-31&minAmount=100&maxAmount=1000",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "expenses", "search"],
+							"query": [
+								{"key": "categoryId", "value": "1"},
+								{"key": "startDate", "value": "2026-05-01"},
+								{"key": "endDate", "value": "2026-05-31"},
+								{"key": "minAmount", "value": "100"},
+								{"key": "maxAmount", "value": "1000"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Monthly Budget Summary",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}/summary",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}", "summary"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
